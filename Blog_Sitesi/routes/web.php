@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\IcerikController;
 use App\Http\Controllers\YorumController;
 use App\Http\Controllers\IletisimController;
-
+use App\Http\Controllers\AdminController;
 
 
 Route::get('/', function () {
@@ -38,3 +38,21 @@ Route::post('/icerik/{id}/yorum', [YorumController::class, 'store']);
 
 Route::get('/iletisim', fn() => view('iletisim'));
 Route::post('/iletisim', [IletisimController::class, 'store']);
+
+Route::get('/bilgilendirme-sayfa', fn() => view('bilgilendirme-sayfa'));
+
+
+ // use App\Http\Controllers\AdminController;
+
+Route::get('/admin', [AdminController::class, 'dashboard']);
+ // Route::get('/admin', fn() => view('admin'));
+
+Route::post('/admin/icerik-ekle', [AdminController::class, 'icerikEkle']);
+
+
+// dinamik bir işlem olduğu için böyle yapılıyor 
+Route::post('/admin/icerik/{id}/yayina-al', [AdminController::class, 'icerikYayinaAl']);
+Route::post('/admin/icerik/{id}/yayindan-kaldir', [AdminController::class, 'icerikYayindanKaldir']);
+
+Route::post('/admin/yorum/{id}/onayla', [AdminController::class, 'yorumOnayla']);
+Route::post('/admin/yorum/{id}/sil', [AdminController::class, 'yorumSil']);
