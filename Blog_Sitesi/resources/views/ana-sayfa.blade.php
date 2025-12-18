@@ -266,7 +266,7 @@
             </div>
         </section>
 
-        <section class="featured" id="one-feature">
+        <!-- <section class="featured" id="one-feature">
             <img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1200&q=80" alt="Amsterdam Gezisi">
             <div>
                 <div class="category">Gezi</div>
@@ -281,7 +281,48 @@
                 </p>
                 <a class="btn btn-primary" href="/hikaye-detay">Devamını Oku</a>
             </div>
-        </section>
+        </section> -->
+
+
+ @php($one = $icerikler->first())
+
+ @if($one)
+    <section class="featured" id="one-feature">
+        <img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1200&q=80"
+             alt="{{ $one->baslik }}">
+
+        <div>
+            <div class="category">İçerik</div>
+            <h2>{{ $one->baslik }}</h2>
+
+            <p class="excerpt">
+                {{ \Illuminate\Support\Str::limit($one->icerik, 220) }}
+            </p>
+
+            <a class="btn btn-primary" href="/icerik/{{ $one->id }}">Devamını Oku</a>
+        </div>
+    </section>
+
+    {{-- Diğer içerikler (liste) --}}
+    <section class="cards" style="max-width:1180px; margin: 0 auto 40px;">
+        @foreach($icerikler->skip(1) as $icerik)
+            <div class="card">
+                <div class="category">İçerik</div>
+                <h3>{{ $icerik->baslik }}</h3>
+
+                <p class="excerpt">
+                    {{ \Illuminate\Support\Str::limit($icerik->icerik, 160) }}
+                </p>
+
+                <a class="btn btn-primary" href="/icerik/{{ $icerik->id }}">Devamını Oku</a>
+            </div>
+        @endforeach
+    </section>
+@else
+    <section style="max-width:1180px; margin: 0 auto 40px;">
+        <p>Henüz içerik eklenmemiş.</p>
+    </section>
+@endif
 
 
     </main>

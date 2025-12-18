@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class iletisimkurma extends Model
 {
-    protected $table = 'iletisim_mesajlari';
+    protected $table = 'iletisim';
     public $timestamps = false;
 
     protected $fillable = ['ad', 'eposta', 'konu', 'mesaj', 'okundu'];
