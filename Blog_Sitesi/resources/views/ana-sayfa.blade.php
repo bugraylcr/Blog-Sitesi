@@ -67,23 +67,14 @@
             border-bottom: 2px solid transparent;
             transition: color .2s ease, border-color .2s ease;
         }
-        .menu a:hover,
-        .menu a:focus {
+        .menu a:hover {
             color: var(--brand);
             border-color: var(--brand);
         }
-        .cta {
-            padding: 10px 18px;
-            background: var(--brand);
-            color: #fff;
-            border-radius: 999px;
-            font-weight: 600;
-            box-shadow: var(--shadow);
-        }
         .hero {
             position: relative;
-            height: 72vh;
-            min-height: 520px;
+            height: 50vh;
+            min-height: 400px;
             display: grid;
             align-items: center;
             justify-content: center;
@@ -103,69 +94,8 @@
             max-width: 760px;
             margin: 0 auto 28px;
         }
-        .hero .actions {
-            display: flex;
-            gap: 12px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-        .btn {
-            padding: 12px 20px;
-            border-radius: 10px;
-            font-weight: 600;
-            border: 2px solid transparent;
-            transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease, background .2s ease;
-        }
-        .btn-primary {
-            background: #fff;
-            color: var(--brand);
-            box-shadow: var(--shadow);
-        }
-        .btn-primary:hover { transform: translateY(-2px); }
-        .btn-ghost {
-            background: transparent;
-            border-color: #eaf1ff;
-            color: #eaf1ff;
-        }
-        .btn-ghost:hover { background: rgba(255,255,255,0.12); }
-        .section {
-            max-width: 1180px;
-            margin: -80px auto 80px;
-            padding: 0 24px;
-            position: relative;
-            z-index: 2;
-        }
-        .cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 20px;
-        }
-        .card {
-            background: var(--card);
-            padding: 20px;
-            border-radius: 16px;
-            box-shadow: var(--shadow);
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-        .card img {
-            width: 100%;
-            height: 170px;
-            object-fit: cover;
-            border-radius: 12px;
-        }
-        .badge {
-            display: inline-block;
-            padding: 6px 12px;
-            border-radius: 999px;
-            background: rgba(31,78,121,0.08);
-            color: var(--brand);
-            font-weight: 600;
-            font-size: 13px;
-        }
-        .card h3 { font-size: 18px; }
-        .card p { color: var(--muted); font-size: 14px; }
+
+        /* TAŞMA VE ALT ALTA GELME DÜZELTMELERİ */
         .featured {
             max-width: 1180px;
             margin: 60px auto 40px;
@@ -180,66 +110,57 @@
             border-radius: 12px;
             box-shadow: 0 16px 36px rgba(0,0,0,0.1);
         }
-        .featured .category {
-            color: var(--brand);
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 12px;
+        
+        .excerpt, h2, h3, p {
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            word-break: break-word;
         }
-        .featured h2 {
-            font-size: clamp(28px, 3.5vw, 40px);
-            line-height: 1.2;
-            margin: 0 0 8px;
-        }
-        .featured .meta {
+
+        .cards-list {
+            max-width: 1180px;
+            margin: 0 auto 80px;
+            padding: 0 24px;
             display: flex;
-            gap: 16px;
-            color: var(--muted);
-            margin: 6px 0 16px;
-            font-size: 15px;
+            flex-direction: column;
+            gap: 24px;
         }
-        .featured .meta .dot {
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-            background: var(--muted);
-        }
-        .featured .excerpt {
-            color: var(--text);
-            line-height: 1.7;
-            margin-bottom: 22px;
-        }
-        .featured .btn-primary {
-            display: inline-flex;
+        .card {
+            background: var(--card);
+            padding: 24px;
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            display: grid;
+            grid-template-columns: 240px 1fr;
+            gap: 24px;
             align-items: center;
-            justify-content: center;
-            gap: 8px;
-            padding: 14px 22px;
-            border-radius: 8px;
-            background: var(--text);
-            color: #fff;
-            box-shadow: 0 14px 28px rgba(0,0,0,0.12);
-            border: none;
+            min-width: 0; 
         }
-        .featured .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 16px 32px rgba(0,0,0,0.16); }
+
+        .btn-primary {
+            display: inline-block;
+            padding: 12px 24px;
+            background: var(--brand);
+            color: #fff;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: transform .2s;
+            border: none;
+            cursor: pointer;
+        }
+        .btn-primary:hover { transform: translateY(-2px); }
+
         .footer {
             background: #0f1c2b;
             color: #d8e3f5;
-            padding: 36px 24px;
+            padding: 40px 24px;
             text-align: center;
-            margin-top: 60px;
         }
-        .footer a { color: #aac8ff; font-weight: 600; }
+
         @media (max-width: 768px) {
+            .featured { grid-template-columns: 1fr; }
+            .card { grid-template-columns: 1fr; }
             .menu { display: none; }
-            .hero { height: auto; padding: 120px 24px; }
-            .section { margin-top: -40px; }
-            .featured {
-                grid-template-columns: 1fr;
-                margin: 32px auto 24px;
-            }
-            .featured h2 { font-size: 26px; }
         }
     </style>
 </head>
@@ -251,7 +172,7 @@
                 <span>BAUM</span>
             </a>
             <div class="menu">
-                <a href="#hero">Ana Sayfa</a>
+                <a href="/">Ana Sayfa</a>
                 <a href="/bilgilendirme-sayfa">Hakkımda</a>
                 <a href="/iletisim">İletişim</a>
             </div>
@@ -259,76 +180,55 @@
     </header>
 
     <main>
-        <section class="hero" id="hero">
+        <section class="hero">
             <div>
                 <h1>Merhaba, BAUM Blog'a hoş geldin</h1>
-                <p>Okur dostu içerikler, ilham veren hikayeler ve toplulukla etkileşime geçebileceğin sade bir blog arayüzü. Tasarım ve yazılımın buluştuğu yerdeyiz.</p>
+                <p>Okur dostu içerikler ve ilham veren hikayeler.</p>
             </div>
         </section>
 
-        <!-- <section class="featured" id="one-feature">
-            <img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1200&q=80" alt="Amsterdam Gezisi">
-            <div>
-                <div class="category">Gezi</div>
-                <h2>Amsterdam Gezisi! Gezdiğim &amp; Gördüğüm Yerler</h2>
-                <div class="meta">
-                    <span>26 Aralık 2022</span>
-                    <span class="dot"></span>
-                    <span>21 yorum</span>
+        @php($one = $icerikler->first())
+
+        @if($one)
+            <section class="featured">
+                <img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1200&q=80" alt="{{ $one->baslik }}">
+                <div>
+                    <div style="color: var(--brand); font-weight: 700; text-transform: uppercase; margin-bottom: 8px;">Öne Çıkan</div>
+                    <h2>{{ $one->baslik }}</h2>
+                    <p class="excerpt" style="margin: 15px 0 25px;">
+                        {{ \Illuminate\Support\Str::limit($one->icerik, 250) }}
+                    </p>
+                    <a class="btn-primary" href="/icerik/{{ $one->id }}">Devamını Oku</a>
                 </div>
-                <p class="excerpt">
-                    Herkese kucak dolusu selamlar! Umarım keyfiniz yerindedir. Şu an benim gayet yerinde olduğunu söyleyebilirim çünkü bu yazıyı yazmak için oturunca nedense içimin kıpır kıpır olduğunu hissettim. Aslında aklımda böyle bir blog yazısı yoktu. Çünkü seyahatime çıkarken gördüğüm, gezdiğim yerleri blogumda da paylaşırım kafasında değildim. Ancak düşündüm ki neredeyse yaptığım her şeyi telefonuma kaydetmişken ve hazır...
-                </p>
-                <a class="btn btn-primary" href="/hikaye-detay">Devamını Oku</a>
+            </section>
+
+            <div class="cards-list">
+                @foreach($icerikler->skip(1) as $icerik)
+                    <div class="card">
+                        <img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=500&q=80" 
+                             alt="İçerik Görseli"
+                             style="width: 100%; height: 150px; object-fit: cover; border-radius: 12px;">
+                        
+                        <div>
+                            <div style="color: var(--brand); font-weight: 600; font-size: 13px;">İÇERİK</div>
+                            <h3 style="margin: 5px 0 10px;">{{ $icerik->baslik }}</h3>
+                            <p class="excerpt" style="margin-bottom: 15px;">
+                                {{ \Illuminate\Support\Str::limit($icerik->icerik, 160) }}
+                            </p>
+                            <a class="btn-primary" href="/icerik/{{ $icerik->id }}" style="padding: 8px 16px; font-size: 14px;">Oku</a>
+                        </div>
+                    </div>
+                @endforeach
             </div>
-        </section> -->
-
-
- @php($one = $icerikler->first())
-
- @if($one)
-    <section class="featured" id="one-feature">
-        <img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1200&q=80"
-             alt="{{ $one->baslik }}">
-
-        <div>
-            <div class="category">İçerik</div>
-            <h2>{{ $one->baslik }}</h2>
-
-            <p class="excerpt">
-                {{ \Illuminate\Support\Str::limit($one->icerik, 220) }}
-            </p>
-
-            <a class="btn btn-primary" href="/icerik/{{ $one->id }}">Devamını Oku</a>
-        </div>
-    </section>
-
-    {{-- Diğer içerikler (liste) --}}
-    <section class="cards" style="max-width:1180px; margin: 0 auto 40px;">
-        @foreach($icerikler->skip(1) as $icerik)
-            <div class="card">
-                <div class="category">İçerik</div>
-                <h3>{{ $icerik->baslik }}</h3>
-
-                <p class="excerpt">
-                    {{ \Illuminate\Support\Str::limit($icerik->icerik, 160) }}
-                </p>
-
-                <a class="btn btn-primary" href="/icerik/{{ $icerik->id }}">Devamını Oku</a>
-            </div>
-        @endforeach
-    </section>
-@else
-    <section style="max-width:1180px; margin: 0 auto 40px;">
-        <p>Henüz içerik eklenmemiş.</p>
-    </section>
-@endif
-
-
+        @else
+            <section style="text-align: center; padding: 60px;">
+                <p>Henüz içerik eklenmemiş.</p>
+            </section>
+        @endif
     </main>
 
     <footer class="footer">
-        <div>© {{ date('Y') }} BAUM Blog · <a href="/bilgilendirme-sayfa">Hakkında</a></div>
+        <div>© {{ date('Y') }} BAUM Blog · <a href="/bilgilendirme-sayfa" style="color: #aac8ff;">Hakkında</a></div>
     </footer>
 </body>
 </html>
