@@ -56,9 +56,11 @@
               <button class="ok">Yayına Al</button>
             </form>
           @else
-            <form method="POST" action="/admin/icerik/{{ $i->id }}/yayindan-kaldir" style="display:inline">
-              @csrf
-              <button class="danger">Kaldır</button>
+            <form method="POST" action="{{ route('admin.icerik.destroy', $i->id) }}"
+                  onsubmit="return confirm('İçeriği yayından kaldırmak (silmek) istiyor musun?')">
+                @csrf
+                @method('DELETE')
+                <button type="submit">Yayından Kaldır</button>
             </form>
           @endif
         </td>
@@ -105,7 +107,7 @@
         <td>{{ $m->ad }}</td>
         <td>{{ $m->eposta }}</td>
         <td>{{ $m->konu }}</td>
-        <td>{{ $m->mesaj }}</td>
+        <td>{{ $m->mesaj }}</td> 
       </tr>
     @endforeach
   </table>

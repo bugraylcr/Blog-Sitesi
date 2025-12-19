@@ -5,8 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Icerik;
 use App\Models\Yorum;
- use App\Models\iletisim;
+use App\Models\iletisim;
 use App\Models\iletisimkurma;
+
 
 class AdminController extends Controller
 {
@@ -57,5 +58,13 @@ class AdminController extends Controller
     {
         Yorum::where('id',$id)->delete();
         return back();
+    }
+    // Burada Yazılan içeriğin silinme işlemi yapılır 
+    public function destroy($id)
+    {
+    $icerik = Icerik::findOrFail($id);
+    $icerik->delete();
+
+    return back()->with('success', 'İçerik silindi.');
     }
 }

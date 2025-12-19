@@ -56,3 +56,5 @@ Route::post('/admin/icerik/{id}/yayindan-kaldir', [AdminController::class, 'icer
 
 Route::post('/admin/yorum/{id}/onayla', [AdminController::class, 'yorumOnayla']);
 Route::post('/admin/yorum/{id}/sil', [AdminController::class, 'yorumSil']);
+
+Route::delete('/admin/icerik/{id}', [AdminController::class, 'destroy'])->name('admin.icerik.destroy');
