@@ -20,9 +20,11 @@ class IcerikController extends Controller
     {
         $icerik = Icerik::where('id', $id)->where('yayinda', 1)->firstOrFail();
 
+        // Sadece parent_id'si olmayan (ana yorumlar) ve onaylı olanları çek
         $yorumlar = yorum::where('icerik_id', $id)
+            ->whereNull('parent_id') // Bu satır tekrarı önler
             ->where('onayli', 1)
-            ->orderByDesc('id')
+            ->with('yanitlar') // Yanıtları ilişkiyle beraber çek
             ->get();
 
         return view('hikaye-detay', compact('icerik', 'yorumlar'));

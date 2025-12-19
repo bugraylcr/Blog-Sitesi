@@ -47,7 +47,6 @@
             font-family: 'Playfair Display', serif;
             font-size: 36px;
             letter-spacing: -0.3px;
-            /* Başlık çok uzunsa taşmasın */
             word-wrap: break-word;
             overflow-wrap: break-word;
         }
@@ -55,10 +54,6 @@
         .breadcrumb {
             color: var(--muted);
             font-weight: 600;
-        }
-
-        .breadcrumb a:hover {
-            text-decoration: underline;
         }
 
         .page {
@@ -74,7 +69,6 @@
             box-shadow: 0 12px 32px rgba(0, 0, 0, 0.05);
             padding: 24px;
             margin-bottom: 26px;
-            /* Flexbox kaynaklı taşmaları engeller */
             min-width: 0; 
         }
 
@@ -84,15 +78,10 @@
             margin-bottom: 12px;
         }
 
-        /* 1. HATA ÇÖZÜMÜ: Yazının sağa uzayıp gitmesini engelleyen kısım */
         .story-content {
             word-wrap: break-word;
             overflow-wrap: break-word;
-            word-break: break-word; /* Çok uzun anlamsız kelimeleri böler */
-        }
-
-        .story-content p {
-            margin: 0 0 14px;
+            word-break: break-word;
         }
 
         .comments {
@@ -112,9 +101,8 @@
             display: grid;
             grid-template-columns: 50px 1fr;
             gap: 12px;
-            padding: 14px 0;
+            padding: 20px 0;
             border-top: 1px solid var(--border);
-            /* Yorumların içinde de taşma olmasın */
             min-width: 0;
         }
 
@@ -122,12 +110,28 @@
             border-top: none;
         }
 
-        /* Yorum metinleri için taşma koruması */
         .comment-body {
-            margin: 0;
+            margin: 8px 0;
             color: #2c3647;
             word-wrap: break-word;
             overflow-wrap: break-word;
+        }
+
+        /* YANITLAR İÇİN GÜNCELLENEN CSS */
+        .reply-item {
+            margin-top: 12px;
+            padding: 12px 16px;
+            background: #f9fafb;
+            border-left: 3px solid var(--accent);
+            border-radius: 8px;
+            min-width: 0;
+        }
+
+        .reply-name {
+            display: block;
+            font-weight: 700;
+            font-size: 14px;
+            margin-bottom: 4px;
         }
 
         .avatar {
@@ -140,13 +144,6 @@
             color: var(--accent);
             font-weight: 700;
             flex-shrink: 0;
-        }
-
-        .comment-header {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            margin-bottom: 4px;
         }
 
         .comment-name {
@@ -171,27 +168,13 @@
             display: block;
         }
 
-        input,
-        textarea {
+        input, textarea {
             width: 100%;
             border: 1px solid var(--border);
             border-radius: 10px;
             padding: 12px 14px;
             font-family: 'Inter', sans-serif;
             font-size: 15px;
-            transition: border-color .2s, box-shadow .2s;
-        }
-
-        input:focus,
-        textarea:focus {
-            outline: none;
-            border-color: rgba(31, 78, 121, 0.35);
-            box-shadow: 0 0 0 3px rgba(31, 78, 121, 0.12);
-        }
-
-        textarea {
-            min-height: 140px;
-            resize: vertical;
         }
 
         .btn {
@@ -203,25 +186,11 @@
             color: #fff;
             font-weight: 700;
             cursor: pointer;
-            box-shadow: 0 10px 20px rgba(31, 78, 121, 0.18);
-            transition: transform .15s ease, box-shadow .2s ease;
-        }
-
-        .btn:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 12px 24px rgba(31, 78, 121, 0.22);
         }
 
         @media (max-width: 640px) {
-            .comment-item {
-                grid-template-columns: 40px 1fr;
-            }
-
-            .avatar {
-                width: 40px;
-                height: 40px;
-                font-size: 13px;
-            }
+            .comment-item { grid-template-columns: 40px 1fr; }
+            .avatar { width: 40px; height: 40px; font-size: 13px; }
         }
     </style>
 </head>
@@ -238,7 +207,6 @@
                 {{ $icerik->created_at ? $icerik->created_at->format('d F Y') : 'Tarih belirtilmedi' }} • 
                 {{ $yorumlar->count() }} yorum
             </div>
-            
             <div class="story-content">
                 {!! nl2br(e($icerik->icerik)) !!}
             </div>
@@ -262,6 +230,20 @@
                             <span class="comment-name">{{ $yorum->ad }}</span>
                         </div>
                         <p class="comment-body">{{ $yorum->yorum }}</p>
+        
+                        <button onclick="cevapla({{ $yorum->id }}, '{{ $yorum->ad }}')" 
+                                style="background:none; border:none; color:var(--accent); cursor:pointer; font-size:13px; padding:0; font-weight:600;">
+                            Cevapla
+                        </button>
+
+                        @foreach($yorum->yanitlar as $yanit)
+                            <div class="reply-item">
+                                <span class="reply-name">{{ $yanit->ad }}</span>
+                                <div class="comment-body" style="font-size: 14px; margin: 0;">
+                                    {{ $yanit->yorum }}
+                                </div>
+                            </div>
+                        @endforeach
                     </div>
                 </div>
             @empty
@@ -271,7 +253,6 @@
 
         <form class="comment-form" method="POST" action="/icerik/{{ $icerik->id }}/yorum">
             @csrf
-
             @if(session('success'))
                 <p style="color:green; margin-bottom:10px;">{{ session('success') }}</p>
             @endif
@@ -300,5 +281,41 @@
             <button class="btn" type="submit">Yorum Gönder</button>
         </form>
     </div>
+
+    <script>
+    function cevapla(id, ad) {
+        let form = document.querySelector('.comment-form');
+        let oldInput = document.getElementById('parent_id_input');
+        
+        if(!oldInput){
+            let input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = 'parent_id';
+            input.id = 'parent_id_input';
+            form.appendChild(input);
+        }
+        
+        document.getElementById('parent_id_input').value = id;
+        
+        let info = document.getElementById('reply-info');
+        if(!info){
+            info = document.createElement('p');
+            info.id = 'reply-info';
+            info.style.color = 'var(--accent)';
+            info.style.fontWeight = 'bold';
+            form.prepend(info);
+        }
+        info.innerHTML = "💬 " + ad + " kişisine cevap veriyorsunuz. <a href='javascript:void(0)' onclick='iptal()' style='color:red; margin-left:10px;'>[Vazgeç]</a>";
+        
+        form.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function iptal() {
+        let input = document.getElementById('parent_id_input');
+        let info = document.getElementById('reply-info');
+        if(input) input.remove();
+        if(info) info.remove();
+    }
+    </script>
 </body>
 </html>
