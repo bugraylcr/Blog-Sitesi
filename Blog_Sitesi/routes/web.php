@@ -43,8 +43,10 @@ Route::get('/bilgilendirme-sayfa', fn() => view('bilgilendirme-sayfa'));
 
 
  // use App\Http\Controllers\AdminController;
-
-Route::get('/admin', [AdminController::class, 'dashboard']);
+Route::middleware(['auth', 'verified'])->group(function () {
+ // Route::get('/admin', [AdminController::class, 'dashboard']);
+// ->name('admin.dashboard') ekledim
+Route::get('/admin', [AdminController::class, 'dashboard'])->name('admin.dashboard');
  // Route::get('/admin', fn() => view('admin'));
 
 Route::post('/admin/icerik-ekle', [AdminController::class, 'icerikEkle']);
@@ -58,3 +60,7 @@ Route::post('/admin/yorum/{id}/onayla', [AdminController::class, 'yorumOnayla'])
 Route::post('/admin/yorum/{id}/sil', [AdminController::class, 'yorumSil']);
 
 Route::delete('/admin/icerik/{id}', [AdminController::class, 'destroy'])->name('admin.icerik.destroy');
+
+
+});
+require __DIR__.'/auth.php';

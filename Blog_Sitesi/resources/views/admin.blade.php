@@ -14,11 +14,26 @@
     .danger{background:#b91c1c;color:#fff}
     .muted{color:#666}
     input,textarea{width:100%;padding:10px;border:1px solid #ddd;border-radius:8px}
+    
+    /* Başlık ve Çıkış Butonu için Esnek Düzen */
+    .header-area {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+    }
   </style>
 </head>
 <body>
 
-<h1>Admin Panel</h1>
+<div class="header-area">
+    <h1>Admin Panel</h1>
+    
+    <form method="POST" action="{{ route('logout') }}">
+        @csrf
+        <button type="submit" class="danger">Çıkış Yap</button>
+    </form>
+</div>
 
 @if(session('success'))
   <p style="color:green">{{ session('success') }}</p>
