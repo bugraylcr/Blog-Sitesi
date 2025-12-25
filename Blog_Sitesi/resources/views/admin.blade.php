@@ -87,13 +87,16 @@
 <div class="box">
   <h2>Yorumlar</h2>
   <table>
-    <tr><th>ID</th><th>İçerik</th><th>Ad</th><th>Yorum</th><th>Durum</th><th>İşlem</th></tr>
+    <tr><th>ID</th><th>İçerik</th><th>Ad</th><th>Yorum</th><th>Yayınlama Tarihi</th><th>Durum</th><th>İşlem</th></tr>
     @foreach($yorumlar as $y)
       <tr>
         <td>{{ $y->id }}</td>
         <td>{{ $y->icerik_id }}</td>
         <td>{{ $y->ad }}</td>
         <td>{{ $y->yorum }}</td>
+        <td>{{ $y->created_at }}</td>
+
+        
         <td class="muted">{{ $y->onayli ? 'Onaylı' : 'Bekliyor' }}</td>
         <td>
           @if(!$y->onayli)

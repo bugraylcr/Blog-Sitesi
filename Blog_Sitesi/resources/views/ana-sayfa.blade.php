@@ -198,6 +198,9 @@
                     <p class="excerpt" style="margin: 15px 0 25px;">
                         {{ \Illuminate\Support\Str::limit($one->icerik, 250) }}
                     </p>
+                      <p class="excerpt" style="margin: 15px 0 25px;">
+                      Yayınlama Tarihi: {{ \Illuminate\Support\Str::limit($one->created_at, 250) }}
+                    </p>
                     <a class="btn-primary" href="/icerik/{{ $one->id }}">Devamını Oku</a>
                 </div>
             </section>

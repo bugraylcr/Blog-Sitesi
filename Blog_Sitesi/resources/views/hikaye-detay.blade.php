@@ -198,6 +198,9 @@
 <body>
     <div class="hero">
         <h1>{{ $icerik->baslik }}</h1>
+          <p>
+         Yayınlanma  Tarihi: {{$icerik->created_at}} 
+         </p>
         <div class="breadcrumb"><a href="/">Ana sayfa</a> / Hikaye</div>
     </div>
 
@@ -211,7 +214,7 @@
                 {!! nl2br(e($icerik->icerik)) !!}
             </div>
         </div>
-
+       
         <div class="comments">
             <h2>Yorumlar</h2>
 

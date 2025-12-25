@@ -7,9 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class yorum extends Model
 {
      protected $table = 'yorumlar';
-    public $timestamps = false;
+    //  public $timestamps = false;
 
-    protected $fillable = ['icerik_id', 'ad', 'eposta', 'yorum', 'onayli','parent_id'];
+    protected $fillable = ['icerik_id', 'ad', 'eposta', 'yorum', 'onayli','parent_id',"created_at","updated_at"];
 
     public function icerik()
     {

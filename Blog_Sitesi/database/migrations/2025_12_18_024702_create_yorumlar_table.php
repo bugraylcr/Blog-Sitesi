@@ -13,7 +13,7 @@ return new class extends Migration
     {
       //    Schema::create('yorumlar', function (Blueprint $table) {
     
-Schema::create('yorumlar', function (Illuminate\Database\Schema\Blueprint $table) {
+Schema::table('yorumlar', function (Illuminate\Database\Schema\Blueprint $table) {
     $table->id();
     $table->unsignedBigInteger('icerik_id');
     $table->string('ad', 100);

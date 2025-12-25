@@ -3,27 +3,31 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+// burada form dan gelen veriyi işlemek için Request kullanılır 
+
 use App\Models\Icerik;
 use App\Models\Yorum;
 use App\Models\iletisim;
 use App\Models\iletisimkurma;
 
-
+// burada extends ile kalıtım işlemi yapılır 
 class AdminController extends Controller
 {
     public function dashboard()
     {
+        // içerik tablosundaki tüm verileri id ye göre azalan şekilde alır
+        // get hepsini liste olarak alır 
         $icerikler = Icerik::orderBy('id','desc')->get();
         $yorumlar = Yorum::orderBy('id','desc')->get();
         $mesajlar = Iletisimkurma::orderBy('id','desc')->get();
-
+            // compact ile değişkenler view e gönderilir
         return view('admin', compact('icerikler','yorumlar','mesajlar'));
     }
 
     public function icerikEkle(Request $request)
     {
         $request->validate([
-            'baslik' => 'required',
+            'baslik' => 'required', // burada zorunluluk sağlanır 
             'icerik' => 'required',
         ]);
 
