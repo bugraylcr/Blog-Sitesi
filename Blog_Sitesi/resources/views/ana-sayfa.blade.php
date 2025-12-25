@@ -199,7 +199,8 @@
                         {{ \Illuminate\Support\Str::limit($one->icerik, 250) }}
                     </p>
                       <p class="excerpt" style="margin: 15px 0 25px;">
-                      Yayınlama Tarihi: {{ \Illuminate\Support\Str::limit($one->created_at, 250) }}
+                      Yayınlama Tarihi: {{ \Illuminate\Support\Str::limit($one->created_at, 250) }} <br>
+                                 Guncelleme Tarihi: {{$one->updated_at}}
                     </p>
                     <a class="btn-primary" href="/icerik/{{ $one->id }}">Devamını Oku</a>
                 </div>
@@ -213,11 +214,18 @@
                              style="width: 100%; height: 150px; object-fit: cover; border-radius: 12px;">
                         
                         <div>
-                            <div style="color: var(--brand); font-weight: 600; font-size: 13px;">İÇERİK</div>
-                            <h3 style="margin: 5px 0 10px;">{{ $icerik->baslik }}</h3>
-                            <p class="excerpt" style="margin-bottom: 15px;">
+                            <!-- <div style="color: var(--brand); font-weight: 600; font-size: 13px;">İÇERİK</div> -->
+                            <h3 style="margin: 5px 0 14px;">{{ $icerik->baslik }}  </h3>
+                          <!-- <h4 style="margin: 5px 0 10px;">  Yayınlama Tarihi: {{ $icerik->created_at }}</h4> -->
+                           <p style= "margin-bottom:10px">
+                                 Yayınlama Tarihi: {{ $icerik->created_at }} <br>
+                                 Guncelleme Tarihi: {{$icerik->updated_at}}
+
+                            </p> 
+                          <p class="excerpt" style="margin-bottom: 15px;">
                                 {{ \Illuminate\Support\Str::limit($icerik->icerik, 160) }}
                             </p>
+                           
                             <a class="btn-primary" href="/icerik/{{ $icerik->id }}" style="padding: 8px 16px; font-size: 14px;">Oku</a>
                         </div>
                     </div>

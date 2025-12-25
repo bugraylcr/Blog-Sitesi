@@ -58,7 +58,7 @@
 <div class="box">
   <h2>İçerikler</h2>
   <table>
-    <tr><th>ID</th><th>Başlık</th><th>Durum</th><th>İşlem</th></tr>
+    <tr><th>ID</th><th>Başlık</th><th>Durum</th><th>İşlem</th><th>Yayınlama Tarihi:</th><th>Guncelleme Tarihi:</th></tr>
     @foreach($icerikler as $i)
       <tr>
         <td>{{ $i->id }}</td>
@@ -79,6 +79,8 @@
             </form>
           @endif
         </td>
+        <td>{{$i->created_at}}</td>
+        <td>{{$i->updated_at}}</td>
       </tr>
     @endforeach
   </table>
@@ -87,7 +89,7 @@
 <div class="box">
   <h2>Yorumlar</h2>
   <table>
-    <tr><th>ID</th><th>İçerik</th><th>Ad</th><th>Yorum</th><th>Yayınlama Tarihi</th><th>Durum</th><th>İşlem</th></tr>
+    <tr><th>ID</th><th>İçerik</th><th>Ad</th><th>Yorum</th><th>Yayınlama Tarihi:</th><th>Guncelleme Tarihi:</th><th>Durum</th><th>İşlem</th></tr>
     @foreach($yorumlar as $y)
       <tr>
         <td>{{ $y->id }}</td>
@@ -95,6 +97,8 @@
         <td>{{ $y->ad }}</td>
         <td>{{ $y->yorum }}</td>
         <td>{{ $y->created_at }}</td>
+        <td>{{ $y->updated_at }}</td>
+
 
         
         <td class="muted">{{ $y->onayli ? 'Onaylı' : 'Bekliyor' }}</td>
