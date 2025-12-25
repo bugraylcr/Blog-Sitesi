@@ -12,11 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('yorumlar', function (Blueprint $table) {
-            if (!Schema::hasColumn('yorumlar', 'created_at') && !Schema::hasColumn('yorumlar', 'updated_at')) {
-
-                  $table->timestamps();
-            }
-          
+            $table->softDeletes();
         });
     }
 

@@ -54,6 +54,8 @@ Route::post('/admin/icerik-ekle', [AdminController::class, 'icerikEkle']);
 
 // dinamik bir işlem olduğu için böyle yapılıyor 
 Route::post('/admin/icerik/{id}/yayina-al', [AdminController::class, 'icerikYayinaAl']);
+Route::post('/admin/icerik/{id}/sil', [AdminController::class, 'icerikSil']);
+
 Route::post('/admin/icerik/{id}/yayindan-kaldir', [AdminController::class, 'icerikYayindanKaldir']);
 
 Route::post('/admin/yorum/{id}/onayla', [AdminController::class, 'yorumOnayla']);

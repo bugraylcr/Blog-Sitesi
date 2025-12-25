@@ -3,12 +3,13 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class yorum extends Model
 {
      protected $table = 'yorumlar';
     //  public $timestamps = false;
-
+        use SoftDeletes;
     protected $fillable = ['icerik_id', 'ad', 'eposta', 'yorum', 'onayli','parent_id',"created_at","updated_at"];
 
     public function icerik()

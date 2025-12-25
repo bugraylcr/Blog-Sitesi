@@ -64,6 +64,11 @@ class AdminController extends Controller
         return back();
     }
     // Burada Yazılan içeriğin silinme işlemi yapılır 
+      public function icerikSil($id)
+    {
+        icerik::where('id',$id)->delete();
+        return back();
+    }
     public function destroy($id)
     {
     $icerik = Icerik::findOrFail($id);

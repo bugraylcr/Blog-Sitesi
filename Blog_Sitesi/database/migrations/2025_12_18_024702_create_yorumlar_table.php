@@ -20,6 +20,7 @@ Schema::table('yorumlar', function (Illuminate\Database\Schema\Blueprint $table)
     $table->string('eposta', 150);
     $table->text('yorum');
     $table->boolean('onayli')->default(0);
+    $table->softDeletes();
 
     $table->foreign('icerik_id') // burada foreign key yapısı ve 
           ->references('id') // burada ise primary key vardır 

@@ -58,9 +58,10 @@
 <div class="box">
   <h2>İçerikler</h2>
   <table>
-    <tr><th>ID</th><th>Başlık</th><th>Durum</th><th>İşlem</th><th>Yayınlama Tarihi:</th><th>Guncelleme Tarihi:</th></tr>
+    <tr><th>ID</th><th>Başlık</th><th>Durum</th><th>Yayın</th><th>Yayınlama Tarihi:</th><th>Guncelleme Tarihi:</th> <th>İşlem</th></tr>
     @foreach($icerikler as $i)
-      <tr>
+    <div style = "display:flex; gap:10px">
+      <tr style =  "gap:10px;">
         <td>{{ $i->id }}</td>
         <td>{{ $i->baslik }}</td>
         <td class="muted">{{ $i->yayinda ? 'Yayında' : 'Kapalı' }}</td>
@@ -71,20 +72,34 @@
               <button class="ok">Yayına Al</button>
             </form>
           @else
-            <form method="POST" action="{{ route('admin.icerik.destroy', $i->id) }}"
+            <form method="POST"  style = " margin-bottom: 10 px ;" action="{{ route('admin.icerik.destroy', $i->id) }} "
                   onsubmit="return confirm('İçeriği yayından kaldırmak (silmek) istiyor musun?')">
                 @csrf
                 @method('DELETE')
                 <button type="submit">Yayından Kaldır</button>
+                <!-- tam olarak sil me işleminde de aynı soruyu soruyor  -->
+   <!-- burada bir sorun var  -->
+    <!-- sorun çözüldü sorun form yapısını tam kapanmamasıdır  -->
             </form>
           @endif
         </td>
+        </div>
         <td>{{$i->created_at}}</td>
         <td>{{$i->updated_at}}</td>
-      </tr>
+ 
+
+    <!-- ///////////////////////////////////////////////////////////////////////////     -->
+        <td>
+          
+             <form method="POST" action="/admin/icerik/{{ $i->id }}/sil" style="display:inline ; margin-top: 10 px ; ">
+            @csrf
+            <button class="danger">Sil</button>
+          </form>
     @endforeach
+        </td>
   </table>
-</div>
+   
+  
 
 <div class="box">
   <h2>Yorumlar</h2>

@@ -21,6 +21,8 @@ return new class extends Migration
     $table->text('icerik');
     $table->boolean('yayinda')->default(0);
       $table->timestamps();
+    $table->softDeletes();
+
 });
 
        //  });
