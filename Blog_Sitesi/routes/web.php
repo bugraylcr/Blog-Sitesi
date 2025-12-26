@@ -5,7 +5,7 @@ use App\Http\Controllers\IcerikController;
 use App\Http\Controllers\YorumController;
 use App\Http\Controllers\IletisimController;
 use App\Http\Controllers\AdminController;
-
+use App\Http\Controllers\Kullanicilar;
 
 Route::get('/', function () {
     return view('ana-sayfa');
@@ -66,3 +66,9 @@ Route::delete('/admin/icerik/{id}', [AdminController::class, 'destroy'])->name('
 
 });
 require __DIR__.'/auth.php';
+
+Route::post('/adminKullaniciEkle', [Kullanicilar::class, 'Ekleme'])->name("aaa");
+
+Route::get('/adminKullaniciEkle', function () {
+    return view('adminKullaniciEkle');
+});

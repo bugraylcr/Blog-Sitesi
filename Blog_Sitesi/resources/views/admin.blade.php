@@ -33,6 +33,11 @@
         @csrf
         <button type="submit" class="danger">Çıkış Yap</button>
     </form>
+    <a href="/adminKullaniciEkle"> 
+            <button type="submit" class= "ok" >Kullanıcı Ekle </button>
+    </a>
+          
+
 </div>
 
 @if(session('success'))
